@@ -1,0 +1,9 @@
+
+
+{% block content %}
+<form method="post" enctype="multipart/form-data"> # без конструкции enctype="multipart/form-data" картинка не загрузится
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Добавить сыр">
+</form>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% block content %}
+<p></p>
+<p>{{ product.name }}</p>
+<p></p>
+<p><img src="{{MEDIA_URL}}{{ product.image.url}}"></p>
+<p></p>
+<p>{{ product.text }}</p>
+<p></p>
+<p>всего {{ product.amount }}   стоимость: {{ product.price }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Добавить коментарий">
+</form>
+
+{% endblock content %}

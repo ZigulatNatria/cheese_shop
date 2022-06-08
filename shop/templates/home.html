@@ -1,0 +1,15 @@
+{% block content %}
+{% for category in categorys %}
+     <tr>
+         <td>
+             {{ category.name }}
+        </td>
+         <td>
+             {{ category.text }}
+         </td>
+         <td>
+             <p><a href="{% url 'by_category' category.pk %}"> <img src="{{MEDIA_URL}}{{ category.image.url}}"></a></p>
+         </td>
+     </tr>
+{% endfor %}
+{% endblock content %}

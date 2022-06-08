@@ -1,0 +1,26 @@
+{% block content %}
+{% for product in products %}
+     <tr>
+         <td>
+         </td>
+        <td>
+            <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+        </td>
+        <td>
+            {{ product.text }}
+        </td>
+         <td>
+             {{ product.price }}
+         </td>
+         <td>
+             {{ product.amount }}
+         </td>
+         <td>
+             {{ product.productCategory.name }}
+         </td>
+         <td>
+             <p><a href="{% url 'product_detail' product.id %}"> <img src="{{MEDIA_URL}}{{ product.image.url}}"></a></p>
+         </td>
+     </tr>
+{% endfor %}
+{% endblock content %}
