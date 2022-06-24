@@ -28,8 +28,8 @@ class ProductForm(ModelForm):
 
 
 class ContactForm(forms.Form):
-    name = forms.CharField(max_length=50)
-    telephone = forms.CharField(max_length=50) #вписать именно на цифры
+    name = forms.CharField(max_length=50, label='Имя')
+    telephone = forms.CharField(max_length=50, label='Телефон') #вписать именно на цифры
     # telephone = forms.IntegerField()
     message = forms.CharField(widget=forms.Textarea,
-                              max_length=2000)
+                              max_length=2000, label='Опишите ваш заказ')

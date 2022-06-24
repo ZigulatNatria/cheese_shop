@@ -60,7 +60,7 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = "Пробное сообщение"
+            subject = "Заказ сыра!!!"
             body = {
                 'name': form.cleaned_data['name'],
                 'telephone': form.cleaned_data['telephone'],
