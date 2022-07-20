@@ -50,6 +50,15 @@
                                         <button type="submit">Отправить</button>
                                     </center>
                          </form>
+            <center>
+                <font color="#fc0808" face="Impact">
+             {% if messages %}
+            {% for message in messages%}
+            {{message}}
+            {% endfor %}
+            {% endif %}
+                    </font>
+            </center>
                         </p></div>
         <footer class="footer text-faded text-center py-5">
             <div class="container"><p class="m-0 small">Copyright &copy; Your Website 2022</p></div>

@@ -6,6 +6,7 @@ from .forms import ProductForm, ContactForm   #, UserCommentForm, GuestCommentFo
 from django.urls import reverse_lazy
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
+from django.contrib import messages
 
 # Create your views here.
 class ProductListlView(ListView):
@@ -74,6 +75,8 @@ def contact(request):
             except BadHeaderError:
                 return HttpResponse('Найден некорректный заголовок')
             return redirect("/cheese/")
+        else:
+            messages.error(request, 'НЕПРАВИЛЬНО ВВЕДЁН КОД С КАРТИНКИ') #сообщение если капча не верна
 
     form = ContactForm()
     return render(request, "contact.html", {'form': form})

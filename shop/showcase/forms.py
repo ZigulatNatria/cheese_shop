@@ -1,5 +1,5 @@
 from django.forms import ModelForm, forms
-from captcha.fields import CaptchaField
+from captcha.fields import CaptchaField #для капчи
 from .models import Product, Comment
 from django import forms
 
@@ -33,3 +33,4 @@ class ContactForm(forms.Form):
     # telephone = forms.IntegerField()
     message = forms.CharField(widget=forms.Textarea,
                               max_length=2000, label='Опишите ваш заказ')
+    captcha = CaptchaField() #поле для капчи
