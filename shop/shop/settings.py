@@ -138,3 +138,5 @@ EMAIL_HOST_PASSWORD = password  # пароль от почты
 EMAIL_USE_SSL = True  # Яндекс использует ssl, подробнее о том, что это, почитайте в дополнительных источниках, но включать его здесь обязательно
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #в режиме отладки пилит сообщение вместо почты в консоль
+
+CAPTCHA_FONT_SIZE = 30
