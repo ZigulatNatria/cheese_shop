@@ -23,4 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('captcha/', include('captcha.urls')),   # для капчи
     path('cheese/', include('showcase.urls'))
-] +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # без этой настройки не будет отображения картинки
+] #+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # без этой настройки не будет отображения картинки
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
