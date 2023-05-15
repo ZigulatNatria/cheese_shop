@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'showcase',
+    'cart',       #корзина
     'captcha',    #Для капчи
 ]
+
+CART_SESSION_ID = 'cart' #Ключ для корзины
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
