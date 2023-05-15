@@ -3,16 +3,23 @@
 {% extends 'base.html' %}
     <body>
         {% block content %}
+            <h1 class="text-center">Каталог сыров</h1>
             <div class="container">
                 <div class="row">
                     {% for product in products %}
-                        <div class="card" style="width: 18rem; margin: 1rem">
+                        <div class="card" style="width: 18rem; margin: 1rem;">
                           <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">{{ product.txt }}</p>
+                            <p>Сорт сыра: {{ product.productCategory }}</p>
+                            <p class="card-text">{{ product.text | truncatewords:15 }}</p>
+                          </div>
+                          <div class="card-footer">
+                              Цена: {{ product.price }} ₽
+                          </div>
+                          <div class="card-footer">
                             <a href="#" class="btn btn-primary">В корзину</a>
-                            <a href="#" class="btn btn-primary">О сыре</a>
+                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">О сыре</a>
                           </div>
                         </div>
                     {% endfor %}

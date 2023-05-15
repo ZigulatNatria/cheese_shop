@@ -8,6 +8,9 @@ class Category(models.Model):
     text = models.TextField(null=True, blank=True)
     image = models.ImageField(null=True, width_field=None, height_field=None, upload_to='images/') #TODO убрать null=True полсле сброса базы
 
+    def __str__(self):
+        return self.name
+
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
