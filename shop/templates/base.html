@@ -31,8 +31,19 @@
               </ul>
               <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-                <button class="btn btn-outline-success" type="submit">Поиск</button>
+                <button class="btn btn-outline-success" type="submit" style="margin-right: 5px">Поиск</button>
               </form>
+                {% with total_items=cart|length %}
+                  {% if total_items > 0 %}
+                      Корзина:
+                      <a href="{% url 'cart:cart_detail' %}">
+                          {{ total_items }} |
+                          ₽ {{ cart.get_total_price }}
+                      </a>
+                  {% else %}
+                    Корзина пуста.
+                  {% endif %}
+                {% endwith %}
             </div>
           </div>
         </nav>

@@ -3,7 +3,8 @@ from django.conf import settings
 from showcase.models import Product
 
 
-class Cart:
+class Cart(object):
+
     def __init__(self, request):
         """
         Инициализировать корзину.
@@ -13,7 +14,7 @@ class Cart:
         if not cart:
             # сохранить пустую корзину в сеансе
             cart = self.session[settings.CART_SESSION_ID] = {}
-            self.cart = cart
+        self.cart = cart
 
     def add(self, product, quantity=1, override_quantity=False):
         """
@@ -56,8 +57,8 @@ class Cart:
             cart[str(product.id)]['product'] = product
         for item in cart.values():
             item['price'] = Decimal(item['price'])
-        item['total_price'] = item['price'] * item['quantity']
-        yield item
+            item['total_price'] = item['price'] * item['quantity']
+            yield item
 
     def __len__(self):
         """

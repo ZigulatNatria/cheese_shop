@@ -3,6 +3,7 @@ from django.views.generic import DetailView, ListView
 from .models import Product, Category, Comment
 from django.views.generic.edit import CreateView
 from .forms import ProductForm, ContactForm   #, UserCommentForm, GuestCommentForm
+from cart.forms import CartAddProductForm
 from django.urls import reverse_lazy
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
@@ -21,6 +22,10 @@ class ProductDetailView(DetailView):
     context_object_name = 'product'
     template_name = 'product.html'
     queryset = Product.objects.all()
+
+    def product_add_cart(self):
+        cart_product_form = CartAddProductForm()
+        return cart_product_form
 
     # def comment(self, request, category_pk, pk):
     #     product = Product.objects.get(pk=pk)

@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'captcha',    #Для капчи
 ]
 
-CART_SESSION_ID = 'cart' #Ключ для корзины
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',      #Контекстный процессор для корзины
             ],
         },
     },
@@ -143,3 +143,5 @@ EMAIL_USE_SSL = True  # Яндекс использует ssl, подробне�
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #в режиме отладки пилит сообщение вместо почты в консоль
 
 CAPTCHA_FONT_SIZE = 30
+
+CART_SESSION_ID = 'cart' #Ключ для корзины

@@ -16,7 +16,11 @@
                              <div class="col-lg-5">
                                  <p>Цена: {{ product.price }} ₽</p>
                                  <p>Осталось: {{ product.amount }} ШТ</p>
-                                 <a href="#" class="btn btn-primary">В корзину</a>
+                                 <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                     {{ view.product_add_cart }}
+                                     {% csrf_token %}
+                                     <input type="submit" value="Добавить в корзину">
+                                 </form>
                              </div>
                          </div>
                      </div>
