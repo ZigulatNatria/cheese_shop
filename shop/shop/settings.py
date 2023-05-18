@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'showcase',
     'cart',       #корзина
+    'orders',     #заказы
     'captcha',    #Для капчи
 ]
 
