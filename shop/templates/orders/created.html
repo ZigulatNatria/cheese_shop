@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+    <body>
+        {% block content %}
+            <div class="container">
+                <h1>Спасибо!</h1>
+                <p>Оформление заказа прошло успешно. Ваш номер заказа
+                <strong>{{ order.id }}</strong>.</p>
+            </div>
+        {% endblock content%}
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html" %}
+    <body>
+        {% block content %}
+        <div class="container">
+             <table class="table">
+                <thead>
+                    <tr>
+                        <th>Заказ</th>
+                        <th>Продукт</th>
+                        <th>Цена</th>
+                        <th>Колличство</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <th>{{ order.order }}</th>
+                        <th>{{ order.product.name }}</th>
+                        <th>{{ order.price }}</th>
+                        <th>{{ order.quantity }}</th>
+                    </tr>
+                {% endfor %}
+                </tbody>
+             </table>
+        </div>
+        {% endblock content %}
+    </body>
+</html>

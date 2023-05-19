@@ -9,6 +9,6 @@ urlpatterns = [
     path('', CategoryListlView.as_view(), name='categorys'),
     path('<int:category_id>/', by_category, name='by_category'),
     path('add', ProductAddView.as_view(), name='add'),
-    path('cont', contact, name='contact')
+    path('cont', contact, name='contact'),
 ]
 
