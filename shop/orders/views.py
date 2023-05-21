@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, UpdateView
 
-from .models import OrderItem
-from .forms import OrderCreateForm
+from .models import OrderItem, Order
+from .forms import OrderCreateForm, OrderUpdateForm
 from cart.cart import Cart
 
 
@@ -37,4 +37,13 @@ class OrderList(ListView):
     context_object_name = 'orders'
     template_name = 'orders/order_list.html'
     queryset = OrderItem.objects.all()
+
+
+class OrderUpdate(UpdateView):
+    template_name = 'orders/create.html'
+    form_class = OrderUpdateForm
+
+    def get_object(self, **kwargs):
+        id = self.kwargs.get('pk')
+        return Order.objects.get(pk=id)
 

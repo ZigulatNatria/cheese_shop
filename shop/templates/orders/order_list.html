@@ -11,6 +11,7 @@
                         <th>Продукт</th>
                         <th>Цена</th>
                         <th>Колличство</th>
+                        <th>Статус</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,7 @@
                         <th>{{ order.product.name }}</th>
                         <th>{{ order.price }}</th>
                         <th>{{ order.quantity }}</th>
+                        <th><a href="{% url 'orders:order_update' order.id %}">{{ order.order.paid }}</a></th>
                     </tr>
                 {% endfor %}
                 </tbody>
