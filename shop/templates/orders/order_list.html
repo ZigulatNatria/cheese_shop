@@ -3,6 +3,7 @@
 {% extends "base.html" %}
     <body>
         {% block content %}
+        {% load static %}
         <div class="container">
              <table class="table">
                 <thead>
@@ -11,7 +12,10 @@
                         <th>Продукт</th>
                         <th>Цена</th>
                         <th>Колличство</th>
-                        <th>Статус</th>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Детали</th>
+                        <th>Оплата</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,12 +25,58 @@
                         <th>{{ order.product.name }}</th>
                         <th>{{ order.price }}</th>
                         <th>{{ order.quantity }}</th>
-                        <th><a href="{% url 'orders:order_update' order.id %}">{{ order.order.paid }}</a></th>
+                        <th>{{ order.order.first_name }}</th>
+                        <th>{{ order.order.last_name }}</th>
+                        <th>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ order.order.id }}">
+                                Смотреть
+                            </button>
+                        </th>
+                        {% if order.order.paid %}
+                            <td style="width: 5%">
+                                <a href="{% url 'orders:order_update' order.order.id %}">
+                                    <img src="{% static 'img/true_img.png' %}" style="width: 100%">
+                                </a>
+                            </td>
+                            {% else %}
+                                <td style="width: 5%">
+                                    <a href="{% url 'orders:order_update' order.order.id %}">
+                                        <img src="{% static 'img/false_img.png' %}" style="width: 100%">
+                                    </a>
+                                </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>
              </table>
         </div>
+
+    <!-- Модальное окно -->
+    {% for order in orders %}
+        <div class="modal fade" id="exampleModal{{ order.order.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Данные заказа</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+              </div>
+              <div class="modal-body">
+                    <p>{{ order.order }}</p>
+                    <p>{{ order.order.first_name }}</p>
+                    <p>{{ order.order.last_name }}</p>
+                    <p>{{ order.order.email }}</p>
+                    <p>{{ order.order.address }}</p>
+                    <p>{{ order.order.postal_code }}</p>
+                    <p>{{ order.order.city }}</p>
+                    <p>{{ order.order.created }}</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
         {% endblock content %}
     </body>
 </html>
