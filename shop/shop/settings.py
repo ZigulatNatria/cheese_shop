@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'cart',       #корзина
     'orders',     #заказы
     'captcha',    #Для капчи
+    'sign',
+    'protect',
 ]
 
 
@@ -146,3 +148,6 @@ EMAIL_USE_SSL = True  # Яндекс использует ssl, подробне�
 CAPTCHA_FONT_SIZE = 30
 
 CART_SESSION_ID = 'cart' #Ключ для корзины
+
+LOGIN_URL = '/sign/login/'
+LOGIN_REDIRECT_URL = '/auth/'   #По этому пути редиректится после авторизации

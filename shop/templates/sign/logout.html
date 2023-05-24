@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+    <body>
+        {% block content %}
+            <div class="container">
+                <h2> Вы вышли из системы </h2>
+                <h3><a href="{% url 'login' %}">Войти</a></h3>
+            </div>
+        {% endblock content %}
+    </body>
+</html>

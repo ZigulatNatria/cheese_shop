@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+    <body>
+    {% block content %}
+        <div class="container">
+            <h2> Войти </h2>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>{{ form.username.label_tag }}</td>
+                        <td>{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.password.label_tag }}</td>
+                        <td>{{ form.password }}</td>
+                    </tr>
+                </table>
+                <input type="submit" value="Войти">
+            </form>
+        </div>
+    {% endblock content %}
+    </body>
+</html>
