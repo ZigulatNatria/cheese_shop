@@ -16,6 +16,11 @@ class ProductListlView(ListView):
     template_name = 'products.html'
     queryset = Product.objects.all()
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_aut'] = self.request.user.groups.exists()
+        return context
+
 
 class ProductDetailView(DetailView):
     model = Product
@@ -23,7 +28,7 @@ class ProductDetailView(DetailView):
     template_name = 'product.html'
     queryset = Product.objects.all()
 
-    def product_add_cart(self):
+    def product_add_cart(self):   #Форма добавления продукта в корзину
         cart_product_form = CartAddProductForm()
         return cart_product_form
 
@@ -59,7 +64,7 @@ class ProductAddView(CreateView):
     model = Product
     template_name = 'create.html'
     form_class = ProductForm
-    success_url = reverse_lazy('categorys')
+    success_url = reverse_lazy('products')
 
 
 def contact(request):
