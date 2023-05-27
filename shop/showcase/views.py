@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.contrib import messages
+from django.db.models import Q
 
 # Create your views here.
 class ProductListlView(ListView):
@@ -90,3 +91,17 @@ def contact(request):
 
     form = ContactForm()
     return render(request, "contact.html", {'form': form})
+
+
+def search(request):
+    search_query = request.GET.get('search', '') # передаётся имя ввода (строка поиска)
+
+# если значение search_query существует (в строку поиска введён текст) ищем в нужных полях введённый текст
+    if search_query:
+        # Q(позволяет илспользовать "И", "ИЛИ")
+        products = Product.objects.filter(Q(name__icontains=search_query) | Q(name__icontains=search_query.capitalize())
+                                   | Q(name__icontains=search_query.casefold()))
+    else:
+        products = Product.objects.all()
+    context = {'products': products}
+    return render(request, 'search.html', context)

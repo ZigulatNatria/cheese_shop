@@ -28,23 +28,25 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#">Контакты</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'orders:order_list' %}">Список заказов</a>
-                </li>
+                  {% if is_aut %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'orders:order_list' %}">Список заказов</a>
+                    </li>
+                  {% endif %}
               </ul>
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+              <form class="d-flex" role="search" action="{% url 'search' %}">
+                <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск" name="search">
                 <button class="btn btn-outline-success" type="submit" style="margin-right: 5px">Поиск</button>
               </form>
                 {% with total_items=cart|length %}
                   {% if total_items > 0 %}
-                      Корзина:
+                      <img src="/static/img/cart_true.png" style="width: 3%"/>
                       <a href="{% url 'cart:cart_detail' %}">
                           {{ total_items }} |
                           ₽ {{ cart.get_total_price }}
                       </a>
                   {% elif not order %}
-                    Корзина пуста.
+                    <img src="/static/img/cart_false.png" style="width: 3%"/>
                   {% endif %}
                 {% endwith %}
             </div>
