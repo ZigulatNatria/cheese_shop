@@ -22,6 +22,10 @@ class ProductListlView(ListView):
         context['is_aut'] = self.request.user.groups.exists()
         return context
 
+    def product_add_cart(self):   #Форма добавления продукта в корзину
+        cart_product_form = CartAddProductForm()
+        return cart_product_form
+
 
 class ProductDetailView(DetailView):
     model = Product
@@ -43,7 +47,6 @@ class ProductDetailView(DetailView):
     #         c_form = form_class(request.POST)
     #         if c_form.is_valid():
     #             c_form.save()
-
 
 
 class CategoryListlView(ListView):
