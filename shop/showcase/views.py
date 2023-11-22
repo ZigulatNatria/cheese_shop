@@ -51,8 +51,8 @@ class ProductDetailView(DetailView):
 
 class CategoryListlView(ListView):
     model = Category
-    context_object_name = 'categorys'
-    template_name = 'base.html'
+    context_object_name = 'categories'
+    template_name = 'categories.html'
     queryset = Category.objects.all()
 
 
@@ -61,7 +61,8 @@ def by_category(request, category_id):
     productCategory = Category.objects.all()
     current_category = Category.objects.get(pk=category_id)
     context = {'products': products, 'productCategory': productCategory, 'current_category': current_category}
-    return render (request, 'by_category.html', context)
+    # return render (request, 'by_category.html', context)
+    return render (request, 'products.html', context)
 
 
 class ProductAddView(CreateView):

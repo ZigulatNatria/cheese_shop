@@ -24,7 +24,7 @@ urlpatterns = [
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('captcha/', include('captcha.urls')),   # для капчи
-    path('cheese/', include('showcase.urls')),
+    path('', include('showcase.urls')),
     path('sign/', include('sign.urls')),
     path('auth/', include('protect.urls')),
 ] #+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # без этой настройки не будет отображения картинки
