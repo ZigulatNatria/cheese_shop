@@ -1,3 +1,4 @@
+from django import forms
 from django.shortcuts import render, redirect #get_object_or_404
 from django.views.generic import DetailView, ListView
 from .models import Product, Category, Comment
@@ -34,6 +35,18 @@ class ProductDetailView(DetailView):
     queryset = Product.objects.all()
 
     def product_add_cart(self):   #Форма добавления продукта в корзину
+        current_product = self.get_object()
+        product_id = current_product.id
+        # cart_product_form = CartAddProductForm()
+
+        class CartAddProductForm(forms.Form):
+
+            product = Product.objects.get(id=product_id)
+            list_amount = product.amount + 1
+            PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, list_amount)]
+
+            quantity = forms.TypedChoiceField(label='Колличество', choices=PRODUCT_QUANTITY_CHOICES, coerce=int)
+            override = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
         cart_product_form = CartAddProductForm()
         return cart_product_form
 

@@ -7,40 +7,40 @@
             <div class="container">
                 <div class="row">
                     {% for product in products %}
-                        <div class="card" style="width: 18rem; margin: 1rem;">
-                          <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p>Сорт сыра: {{ product.productCategory }}</p>
-                            <p class="card-text">{{ product.text | truncatewords:15 }}</p>
-                          </div>
-                          <div class="card-footer">
-                              Цена: {{ product.price }} ₽
-                          </div>
-                          <div class="card-footer">
-                              <form action="{% url 'cart:cart_add' product.id %}" method="post">
-                                  <div hidden="true">{{ view.product_add_cart }}</div>
-                                 {% csrf_token %}
-                                 <input class="btn btn-primary btn-sm" type="submit" value="Добавить в корзину">
-                              </form>
-                            <!--
-                            <a href="#" class="btn btn-primary">В корзину</a>
-                            -->
-                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">О сыре</a>
-                          </div>
-                        </div>
-                    {% endfor %}
-                    {% if is_aut %}
+                        {% if product.amount > 0 %}
                             <div class="card" style="width: 18rem; margin: 1rem;">
-                                <img src="/static/img/add_chise.png"/>
+                                <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h2 class="card-title">Добавить сыр</h2>
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                    <p>Сорт сыра: {{ product.productCategory }}</p>
+                                    <p class="card-text">{{ product.text | truncatewords:15 }}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <a class="btn btn-primary btn-sm" href="{% url 'add' %}">Добавить</a>
+                                    Цена: {{ product.price }} ₽
+                                    Осталось: {{ product.amount }}
                                 </div>
+                                <div class="card-footer">
+                                    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                        <div hidden="true">{{ view.product_add_cart }}</div>
+                                        {% csrf_token %}
+                                        <input class="btn btn-primary btn-sm" type="submit" value="Добавить в корзину">
+                                    </form>
+                                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">О сыре</a>
+                              </div>
                             </div>
-                    {% endif %}
+                        {% endif %}
+                    {% endfor %}
+<!--                    {% if is_aut %}-->
+<!--                            <div class="card" style="width: 18rem; margin: 1rem;">-->
+<!--                                <img src="/static/img/add_chise.png"/>-->
+<!--                                <div class="card-body">-->
+<!--                                    <h2 class="card-title">Добавить сыр</h2>-->
+<!--                                </div>-->
+<!--                                <div class="card-footer">-->
+<!--                                    <a class="btn btn-primary btn-sm" href="{% url 'add' %}">Добавить</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                    {% endif %}-->
                 </div>
             </div>
         {% endblock content %}

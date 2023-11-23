@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 from showcase.models import Product
 from .cart import Cart
 from .forms import CartAddProductForm
+from showcase.views import ProductDetailView
 
 @require_POST
 def cart_add(request, product_id):
@@ -15,6 +16,8 @@ def cart_add(request, product_id):
         cart.add(product=product,
                  quantity=cd['quantity'],
                  override_quantity=cd['override'])
+        summ = product.amount - cd['quantity']
+        Product.objects.filter(id=product_id).update(amount=summ)
     return redirect('cart:cart_detail')
 
 

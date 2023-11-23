@@ -19,7 +19,7 @@ class Product(models.Model):
     name = models.CharField(verbose_name='название', max_length=50)
     text = models.TextField(verbose_name='описание', null=True, blank=True)
     price = models.FloatField(verbose_name='цена', null=True, blank=True)
-    amount = models.IntegerField(verbose_name='количество', null=True, blank=True)
+    amount = models.PositiveIntegerField(verbose_name='количество', null=True, blank=True)
     image = models.ImageField(verbose_name='фото', width_field=None, height_field=None, upload_to='images/')
     # productCategory = models.ManyToManyField(Category, through='ProductCategory')
     productCategory = models.ForeignKey('Category', verbose_name='категория продукта', null=True, on_delete=models.CASCADE)
