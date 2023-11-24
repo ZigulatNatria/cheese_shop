@@ -8,12 +8,13 @@
                 <div class="row">
                     {% for product in products %}
                         {% if product.amount > 0 %}
-                            <div class="card" style="width: 18rem; margin: 1rem;">
+                            <div class="card" style="width: 18rem; margin: 1rem; border: none">
+                                <a href="{% url 'product_detail' product.id %}" style="text-decoration: None; color: black">
                                 <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ product.name }}</h5>
                                     <p>Сорт сыра: {{ product.productCategory }}</p>
-                                    <p class="card-text">{{ product.text | truncatewords:15 }}</p>
+<!--                                    <p class="card-text">{{ product.text | truncatewords:15 }}</p>-->
                                 </div>
                                 <div class="card-footer">
                                     Цена: {{ product.price }} ₽
@@ -21,12 +22,12 @@
                                 </div>
                                 <div class="card-footer">
                                     <form action="{% url 'cart:cart_add' product.id %}" method="post">
-                                        <div hidden="true">{{ view.product_add_cart }}</div>
+                                        {{ view.product_add_cart }}
                                         {% csrf_token %}
-                                        <input class="btn btn-primary btn-sm" type="submit" value="Добавить в корзину">
+                                        <input class="btn btn-primary btn-sm" style="--bs-btn-bg: #ffa500; --bs-btn-border-color:#ffa500; --bs-btn-hover-bg: #ff9900; --bs-btn-hover-border-color: #ff9900; --bs-btn-active-bg: #ff9900; --bs-btn-active-border-color: #ff9900" type="submit" value="Добавить в корзину">
                                     </form>
-                                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">О сыре</a>
-                              </div>
+                                </div>
+                                </a>
                             </div>
                         {% endif %}
                     {% endfor %}

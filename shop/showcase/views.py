@@ -11,7 +11,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.db.models import Q
 
-# Create your views here.
+
 class ProductListlView(ListView):
     model = Product
     context_object_name = 'products'
