@@ -20,7 +20,9 @@ class ProductListlView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['is_aut'] = self.request.user.groups.exists()
+        cart_product_form = CartAddProductForm()
+        context['my_form'] = cart_product_form
+        # context['is_aut'] = self.request.user.groups.exists()
         return context
 
     def product_add_cart(self):   #Форма добавления продукта в корзину

@@ -19,7 +19,7 @@
                                  <form action="{% url 'cart:cart_add' product.id %}" method="post">
                                      {{ view.product_add_cart }}
                                      {% csrf_token %}
-                                     <input type="submit" value="Добавить в корзину">
+                                     <input class="btn btn-primary btn-sm" type="submit" style="--bs-btn-bg: #ffa500; --bs-btn-border-color:#ffa500; --bs-btn-hover-bg: #ff9900; --bs-btn-hover-border-color: #ff9900; --bs-btn-active-bg: #ff9900; --bs-btn-active-border-color: #ff9900" value="Добавить в корзину">
                                  </form>
                              </div>
                          </div>
