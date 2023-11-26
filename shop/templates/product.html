@@ -11,7 +11,21 @@
                      <div class="col-lg-5" style="margin-top: 1rem">
                          <h2>{{ product.name }}</h2>
                          <p>Сорт сыра: {{ product.productCategory }}</p>
-                         <p>{{ product.text }}</p>
+                         <div class="accordion" id="accordionExample">
+                             <div class="accordion-item">
+                                 <h2 class="accordion-header">
+                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"
+                                        style="--bs-accordion-active-bg: #ffa500; color: #000000; --bs-accordion-btn-focus-border-color: #ffa500; --bs-accordion-btn-focus-box-shadow: #ff9900; --bs-accordion-btn-active-icon-color: #000000">
+                                        Описание
+                                     </button>
+                                 </h2>
+                                 <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                     <div class="accordion-body">
+                                         {{ product.text }}
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
                          <div class="row">
                              <div class="col-lg-5">
                                  <p>Цена: {{ product.price }} ₽</p>
@@ -19,7 +33,15 @@
                                  <form action="{% url 'cart:cart_add' product.id %}" method="post">
                                      {{ view.product_add_cart }}
                                      {% csrf_token %}
-                                     <input class="btn btn-primary btn-sm" type="submit" style="--bs-btn-bg: #ffa500; --bs-btn-border-color:#ffa500; --bs-btn-hover-bg: #ff9900; --bs-btn-hover-border-color: #ff9900; --bs-btn-active-bg: #ff9900; --bs-btn-active-border-color: #ff9900" value="Добавить в корзину">
+                                     <input class="btn btn-primary btn-sm" type="submit" style="--bs-btn-bg: #ffa500;
+                                                                                                --bs-btn-border-color:#ffa500;
+                                                                                                --bs-btn-hover-bg: #ff9900;
+                                                                                                --bs-btn-hover-border-color: #ff9900;
+                                                                                                --bs-btn-active-bg: #ff9900;
+                                                                                                --bs-btn-active-border-color: #ff9900;
+                                                                                                color: #000000;
+                                                                                               "
+                                            value="Добавить в корзину">
                                  </form>
                              </div>
                          </div>
