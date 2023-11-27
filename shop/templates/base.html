@@ -15,7 +15,24 @@
                     min-width: 45.66666667% !important;
                     max-width: 45.66666667% !important;
                 }
+
+                .cartMobile {
+                    width: 10% !important;
+                }
+
              }
+        </style>
+        <style>
+            @media screen and (min-width: 765px)
+            {
+                .deleteDesktop {
+                    width: 20% !important;
+                }
+
+                .cartDetailDesktop {
+                    width: 50vw !important;
+                }
+            }
         </style>
 <!--        Изменние цвета иконки (стрелочки в аккордеоне на с синего чёрный) -->
         <style>
@@ -60,13 +77,13 @@
               </form>
                 {% with total_items=cart|length %}
                   {% if total_items > 0 %}
-                      <img src="/static/img/cart_true.png" style="width: 3%"/>
-                      <a href="{% url 'cart:cart_detail' %}">
+                      <img class="cartMobile" src="/static/img/cart_true.png" style="width: 3%"/>
+                      <a href="{% url 'cart:cart_detail' %}" style="color: #F75E25; text-decoration: none;">
                           {{ total_items }} |
                           ₽ {{ cart.get_total_price }}
                       </a>
                   {% elif not order %}
-                    <img src="/static/img/cart_false.png" style="width: 3%"/>
+                    <img class="cartMobile" src="/static/img/cart_false.png" style="width: 3%"/>
                   {% endif %}
                 {% endwith %}
             </div>

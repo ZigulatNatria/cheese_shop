@@ -3,56 +3,74 @@
 {% extends 'base.html' %}
     <body>
         {% block content %}
-            <div class="container">
+            <div class="container" style="text-align: -webkit-center;">
                 <h1>Товары в корзине</h1>
-                <table class="table">
-                <thead>
-                    <tr>
-                        <th>Фото</th>
-                        <th>Название</th>
-                        <th>Колличество</th>
-                        <th>Цена за шт</th>
-                        <th>Цена</th>
-                        <th>Действие</th>
-                    </tr>
-                </thead>
-                <tbody>
                     {% for item in cart %}
                         {% with product=item.product %}
-                            <tr>
-                                <td style="width: 10%"><img src="{{MEDIA_URL}}{{product.image.url}}" class="d-block w-100" alt="..."></td>
-                                <td>{{ product.name }}</td>
-                                <td>
-                                    {{ item.quantity }}
-                                     <form hidden action="{% url 'cart:cart_add' product.id %}" method="post">
-                                         <p>{{ item.update_quantity_form.quantity }}</p>
-                                         {{ item.update_quantity_form.override }}
-                                         <input type="submit" value="Изменить">
-                                         {% csrf_token %}
-                                     </form>
-                                </td>
-                                <td class="num">₽ {{ item.price }}</td>
-                                <td class="num">₽ {{ item.total_price }}</td>
-                                <td>
-                                    <form action="{% url 'cart:cart_remove' product.id %}" method="post">
-                                        <input type="submit" value="Удалить">
-                                        {% csrf_token %}
-                                    </form>
-                                </td>
-                            </tr>
+                    <div class="row cartDetailDesktop" style="align-items: center; border-bottom: solid 1px #FFCA86; margin-bottom: 1rem;">
+                        <div class="col">    <!-- Для фото -->
+                            <img src="{{MEDIA_URL}}{{product.image.url}}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="col">    <!-- Для названия и количества -->
+                            <div class="row">
+                                {{ product.name }}
+                            </div>
+                            <div class="row">
+                                {{ item.quantity }} шт.
+<!--                                <form hidden action="{% url 'cart:cart_add' product.id %}" method="post">-->
+<!--                                    <p>{{ item.update_quantity_form.quantity }}</p>-->
+<!--                                    {{ item.update_quantity_form.override }}-->
+<!--                                    <input type="submit" value="Изменить">-->
+<!--                                    {% csrf_token %}-->
+<!--                                </form>-->
+                            </div>
+                        </div>
+                        <div class="col">      <!-- Цена -->
+                            {{ item.total_price }} ₽
+                        </div>
+                        <div class="col">      <!-- кнопка удаления -->
+                            <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+                                <button type="submit" class="btn" style="background-color: #fff0; border: #fff0; padding-right:0; text-align: right;">
+                                    <img class="deleteDesktop" src="/static/img/trash.png" style="width: 70%">
+                                </button>
+                                {% csrf_token %}
+                            </form>
+                        </div>
+                    </div>
                         {% endwith %}
                     {% endfor %}
-                    <tr class="total">
-                        <td>Общая цена</td>
-                        <td colspan="4"></td>
-                        <td class="num">₽ {{ cart.get_total_price }}</td>
-                    </tr>
-                </tbody>
-                </table>
-                <p class="text-right">
-                    <a href="{% url 'products' %}" class="button light">Continue shopping</a>
-                    <a href="{% url 'orders:order_create' %}" class="button">Checkout</a>
-                </p>
+                    <div class="row cartDetailDesktop" style="background-color: #faebd7; font-weight: bold; margin-bottom: 1rem">
+                        <div class="col">
+                            Общая стоимость
+                        </div>
+                        <div class="col">
+                            {{ cart.get_total_price }} ₽
+                        </div>
+                    </div>
+                <div class="row cartDetailDesktop">
+                    <div class="col">
+                        <a href="{% url 'products' %}" class="btn btn-primary btn-sm" style="--bs-btn-bg: #ffa500;
+                                                                                             --bs-btn-border-color:#ffa500;
+                                                                                             --bs-btn-hover-bg: #ff9900;
+                                                                                             --bs-btn-hover-border-color: #ff9900;
+                                                                                             --bs-btn-active-bg: #ff9900;
+                                                                                             --bs-btn-active-border-color: #ff9900;
+                                                                                             color: #000000;
+                                                                                            "
+                        >На главную</a>
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'orders:order_create' %}" class="btn btn-primary btn-sm" style="--bs-btn-bg: #ffa500;
+                                                                                                        --bs-btn-border-color:#ffa500;
+                                                                                                        --bs-btn-hover-bg: #ff9900;
+                                                                                                        --bs-btn-hover-border-color: #ff9900;
+                                                                                                        --bs-btn-active-bg: #ff9900;
+                                                                                                        --bs-btn-active-border-color: #ff9900;
+                                                                                                         color: #000000;
+                                                                                                        "
+                        >Оформить заказ</a>
+                    </div>
+                </div>
             </div>
         {% endblock content %}
     </body>
