@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends 'base.html' %}
+{% load custom_filters %}
     <body>
         {% block content %}
             <div class="container" style="text-align: -webkit-center;">
@@ -16,7 +17,11 @@
                                 {{ product.name }}
                             </div>
                             <div class="row">
-                                {{ item.quantity }} шт.
+                                {% if product.units == '100_g' %}
+                                    {{ item.quantity|multiplication_100 }} гр.
+                                {% else %}
+                                    {{ item.quantity }} шт.
+                                {% endif %}
 <!--                                <form hidden action="{% url 'cart:cart_add' product.id %}" method="post">-->
 <!--                                    <p>{{ item.update_quantity_form.quantity }}</p>-->
 <!--                                    {{ item.update_quantity_form.override }}-->

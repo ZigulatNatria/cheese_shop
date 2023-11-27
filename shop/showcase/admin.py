@@ -3,8 +3,8 @@ from django.contrib import admin
 from .models import Product, Category, Comment
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'text', 'price', 'amount', 'image', 'productCategory')
-    list_display_links = ('name', 'text', 'price', 'amount', 'image', 'productCategory')
+    list_display = ('name', 'text', 'price', 'amount', 'image', 'productCategory', 'units')
+    list_display_links = ('name', 'text', 'price', 'amount', 'image', 'productCategory', 'units')
     search_fields = ('name', 'text')
 
 

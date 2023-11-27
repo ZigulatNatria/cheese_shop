@@ -16,6 +16,11 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    UNITS = [
+        ('100_g', '100гр'),
+        ('1_things', '1шт')
+    ]
+
     name = models.CharField(verbose_name='название', max_length=50)
     text = models.TextField(verbose_name='описание', null=True, blank=True)
     price = models.FloatField(verbose_name='цена', null=True, blank=True)
@@ -23,6 +28,7 @@ class Product(models.Model):
     image = models.ImageField(verbose_name='фото', width_field=None, height_field=None, upload_to='images/')
     # productCategory = models.ManyToManyField(Category, through='ProductCategory')
     productCategory = models.ForeignKey('Category', verbose_name='категория продукта', null=True, on_delete=models.CASCADE)
+    units = models.CharField(verbose_name='единицы измерения', max_length=10, choices=UNITS, default='100_g')
 
     class Meta:
         verbose_name = 'продукт'
