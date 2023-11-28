@@ -8,6 +8,7 @@
                 <h1>Товары в корзине</h1>
                     {% for item in cart %}
                         {% with product=item.product %}
+                <a href="{% url 'product_detail' product.id %}" style="text-decoration: none; color: #000000">
                     <div class="row cartDetailDesktop" style="align-items: center; border-bottom: solid 1px #FFCA86; margin-bottom: 1rem;">
                         <div class="col">    <!-- Для фото -->
                             <img src="{{MEDIA_URL}}{{product.image.url}}" class="d-block w-100" alt="...">
@@ -42,6 +43,7 @@
                             </form>
                         </div>
                     </div>
+                </a>
                         {% endwith %}
                     {% endfor %}
                     <div class="row cartDetailDesktop" style="background-color: #faebd7; font-weight: bold; margin-bottom: 1rem">

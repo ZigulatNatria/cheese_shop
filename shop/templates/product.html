@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends 'base.html' %}
+{% load custom_filters %}
     <body>
         {% block content %}
             <div class="container">
@@ -11,11 +12,20 @@
                      <div class="col-lg-5" style="margin-top: 1rem">
                          <h2>{{ product.name }}</h2>
                          <p>Сорт сыра: {{ product.productCategory }}</p>
-                         <div class="accordion" id="accordionExample">
+                         <div class="accordion" id="accordionExample" style="--bs-accordion-border-color: none; margin-bottom: 1rem">
                              <div class="accordion-item">
                                  <h2 class="accordion-header">
                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"
-                                        style="--bs-accordion-active-bg: #ffa500; color: #000000; --bs-accordion-btn-focus-border-color: #ffa500; --bs-accordion-btn-focus-box-shadow: #ff9900; --bs-accordion-btn-active-icon-color: #000000">
+                                        style="
+                                                --bs-accordion-active-bg: #ffa500;
+                                                --bs-accordion-btn-focus-border-color: #ffa500;
+                                                --bs-accordion-btn-focus-box-shadow: #ff9900;
+                                                --bs-accordion-btn-active-icon-color: #000000;
+                                                --bs-accordion-btn-bg: #faebd7;
+                                                --bs-accordion-border-color: none;
+                                                color: #000000;
+                                                padding-left: 0;
+                                               ">
                                         Описание
                                      </button>
                                  </h2>
@@ -28,8 +38,14 @@
                          </div>
                          <div class="row">
                              <div class="col-lg-5">
-                                 <p>Цена: {{ product.price }} ₽</p>
-                                 <p>Осталось: {{ product.amount }} ШТ</p>
+                                 <div style="margin-bottom: 1rem">Цена: {{ product.price }}₽ / {{product.get_units_display}}.</div>
+                                 <div style="margin-bottom: 1rem">
+                                     {% if product.units == '100_g' %}
+                                        Осталось: {{ product.amount|multiplication_100 }} гр.
+                                     {% else %}
+                                        Осталось: {{ product.amount }} шт.
+                                     {% endif %}
+                                 </div>
                                  <form action="{% url 'cart:cart_add' product.id %}" method="post">
                                      {{ view.product_add_cart }}
                                      {% csrf_token %}
