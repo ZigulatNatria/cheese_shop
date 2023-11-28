@@ -21,6 +21,11 @@ class OrderAdmin(admin.ModelAdmin):
                     'updated'
                     ]
 
+    list_display_links = ['id',
+                          'first_name',
+                          'last_name',
+                          ]
+
     list_filter = ['paid',
                    'created',
                    'updated'
