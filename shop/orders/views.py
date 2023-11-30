@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView, UpdateView, TemplateView
 
 from .models import OrderItem, Order
 from .forms import OrderCreateForm, OrderUpdateForm
@@ -37,6 +37,16 @@ class OrderList(ListView):
     context_object_name = 'orders'
     template_name = 'orders/order_list.html'
     queryset = OrderItem.objects.all()
+
+
+# class OrderList(TemplateView):
+#     template_name = 'orders/order_list.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         set_categories = {order: order.objects.all() for order in OrderItem.objects.filter()}
+#         context['all_items_by_orders'] = set_categories
+#         return context
 
 
 class OrderUpdate(UpdateView):
