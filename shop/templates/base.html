@@ -73,7 +73,16 @@
               </ul>
               <form class="d-flex" role="search" action="{% url 'search' %}">
                 <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск" name="search">
-                <button class="btn btn-outline-success" type="submit" style="margin-right: 5px">Поиск</button>
+                <button class="btn btn-outline-success" type="submit" style="
+                                                                              margin-right: 5px;
+                                                                              --bs-btn-border-color: #ffa500;
+                                                                              --bs-btn-hover-color: #fff;
+                                                                              --bs-btn-hover-bg: #ffa500;
+                                                                              --bs-btn-hover-border-color: #ffa500;
+                                                                              --bs-btn-active-border-color: #ffa500;
+                                                                              --bs-btn-active-bg: #ffa500;
+                                                                              --bs-btn-color: #ffa500;
+                                                                            ">Поиск</button>
               </form>
                 {% with total_items=cart|length %}
                   {% if total_items > 0 %}
