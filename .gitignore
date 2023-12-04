@@ -3,3 +3,4 @@ venv/
 config.py
 shop/shop/key.py
 /shop/db.sqlite3
+/shop/shop/basesettings.py
