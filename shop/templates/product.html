@@ -9,11 +9,11 @@
                     <div class="col">
                         <img src="{{MEDIA_URL}} {{product.image.url}}" class="d-block w-100" alt="..." style="margin-top: 1rem">
                     </div>
-                     <div class="col-lg-5" style="margin-top: 1rem">
-                         <h2>{{ product.name }}</h2>
-                         <p>Сорт сыра: {{ product.productCategory }}</p>
+                     <div class="col-lg-5" style="margin-top: 1rem; padding: 0">
+                         <h2 style="padding-right: calc(var(--bs-gutter-x) * .5); padding-left: calc(var(--bs-gutter-x) * .5);">{{ product.name }}</h2>
+                         <p style="padding-right: calc(var(--bs-gutter-x) * .5); padding-left: calc(var(--bs-gutter-x) * .5);">Сорт сыра: {{ product.productCategory }}</p>
                          <div class="accordion" id="accordionExample" style="--bs-accordion-border-color: none; margin-bottom: 1rem">
-                             <div class="accordion-item">
+                             <div class="accordion-item" style="margin-bottom: 0.25rem;">
                                  <h2 class="accordion-header">
                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"
                                         style="
@@ -25,6 +25,8 @@
                                                 --bs-accordion-border-color: none;
                                                 color: #000000;
                                                 padding-left: 0;
+                                                padding-right: calc(var(--bs-gutter-x) * .5);
+                                                padding-left: calc(var(--bs-gutter-x) * .5);
                                                ">
                                         Описание
                                      </button>
@@ -35,32 +37,65 @@
                                      </div>
                                  </div>
                              </div>
-                         </div>
-                         <div class="row">
-                             <div class="col-lg-5">
-                                 <div style="margin-bottom: 1rem">Цена: {{ product.price }}₽ / {{product.get_units_display}}.</div>
-                                 <div style="margin-bottom: 1rem">
-                                     {% if product.units == '100_g' %}
-                                        Осталось: {{ product.amount|multiplication_100 }} гр.
-                                     {% else %}
-                                        Осталось: {{ product.amount }} шт.
-                                     {% endif %}
+                             <div class="accordion-item">
+                                 <h2 class="accordion-header">
+                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSecond" aria-expanded="false" aria-controls="collapseOne"
+                                        style="
+                                                --bs-accordion-active-bg: #ffa500;
+                                                --bs-accordion-btn-focus-border-color: #ffa500;
+                                                --bs-accordion-btn-focus-box-shadow: #ff9900;
+                                                --bs-accordion-btn-active-icon-color: #000000;
+                                                --bs-accordion-btn-bg: #faebd7;
+                                                --bs-accordion-border-color: none;
+                                                color: #000000;
+                                                padding-left: 0;
+                                                padding-right: calc(var(--bs-gutter-x) * .5);
+                                                padding-left: calc(var(--bs-gutter-x) * .5);
+                                               ">
+                                        Как заказать
+                                     </button>
+                                 </h2>
+                                 <div id="collapseSecond" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                     <div class="accordion-body">
+                                         Тут содержится текст о правилах заказа данного товара <br>
+                                         {% if product.units == '100_g' %}
+                                         1 единица товара равна 100 граммам <br>
+                                         {% else %}
+                                         1 единица товара равна 1 головке сыра средним весом около 150 грамм
+                                         {% endif %}
+                                     </div>
                                  </div>
-                                 <form action="{% url 'cart:cart_add' product.id %}" method="post">
-                                     {{ view.product_add_cart }}
-                                     {% csrf_token %}
-                                     <input class="btn btn-primary btn-sm" type="submit" style="--bs-btn-bg: #ffa500;
-                                                                                                --bs-btn-border-color:#ffa500;
-                                                                                                --bs-btn-hover-bg: #ff9900;
-                                                                                                --bs-btn-hover-border-color: #ff9900;
-                                                                                                --bs-btn-active-bg: #ff9900;
-                                                                                                --bs-btn-active-border-color: #ff9900;
-                                                                                                color: #000000;
-                                                                                               "
-                                            value="Добавить в корзину">
-                                 </form>
                              </div>
                          </div>
+                             <div style="margin-bottom: 1rem; padding-right: calc(var(--bs-gutter-x) * .5); padding-left: calc(var(--bs-gutter-x) * .5);">
+                                 Цена: {{ product.price }}₽ / {{product.get_units_display}}.
+                             </div>
+                             <div style="margin-bottom: 1rem; padding-right: calc(var(--bs-gutter-x) * .5); padding-left: calc(var(--bs-gutter-x) * .5);">
+                                 {% if product.units == '100_g' %}
+                                    Осталось: {{ product.amount|multiplication_100 }} гр.
+                                 {% else %}
+                                    Осталось: {{ product.amount }} шт.
+                                 {% endif %}
+                             </div>
+                             <form action="{% url 'cart:cart_add' product.id %}" method="post" style="padding-right: calc(var(--bs-gutter-x) * .5); padding-left: calc(var(--bs-gutter-x) * .5);">
+                                 <p>
+                                 {% if product.units == '100_g' %}
+                                    {{ view.product_add_cart }} x 100гр.
+                                 {% else %}
+                                    {{ view.product_add_cart }} шт.
+                                 {% endif %}
+                                 </p>
+                                 {% csrf_token %}
+                                 <input class="btn btn-primary btn-sm" type="submit" style="--bs-btn-bg: #ffa500;
+                                                                                            --bs-btn-border-color:#ffa500;
+                                                                                            --bs-btn-hover-bg: #ff9900;
+                                                                                            --bs-btn-hover-border-color: #ff9900;
+                                                                                            --bs-btn-active-bg: #ff9900;
+                                                                                            --bs-btn-active-border-color: #ff9900;
+                                                                                            color: #000000;
+                                                                                           "
+                                        value="Добавить в корзину">
+                             </form>
                      </div>
                 </div>
             </div>

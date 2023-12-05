@@ -6,8 +6,9 @@ class Order(models.Model):
     first_name = models.CharField(verbose_name='имя', max_length=50)
     last_name = models.CharField(verbose_name='фамилия', max_length=50)
     email = models.EmailField(verbose_name='электронная почта')
+    phone = models.BigIntegerField(verbose_name='телефон')
     address = models.CharField(verbose_name='адрес', max_length=250)
-    postal_code = models.CharField(verbose_name='почтовый индекс', max_length=20)
+    postal_code = models.IntegerField(verbose_name='почтовый индекс', null=True)
     city = models.CharField(verbose_name='город', max_length=100)
     created = models.DateTimeField(verbose_name='создано', auto_now_add=True)
     updated = models.DateTimeField(verbose_name='обновлено', auto_now=True)
@@ -36,6 +37,14 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, verbose_name='товар', related_name='order_items', on_delete=models.CASCADE)
     price = models.DecimalField(verbose_name='цена', max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(verbose_name='количество', default=1)
+
+    class Meta:
+        verbose_name = 'элемент заказа'
+        verbose_name_plural = 'элементы заказа'
+        ordering = ['-id']
+        indexes = [
+            models.Index(fields=['-id']),
+        ]
 
     def __str__(self):
         return str(self.id)
