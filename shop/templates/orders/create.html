@@ -1,44 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends "base.html" %}
+{% load custom_filters %}
     <body>
         {% block content %}
         <div class="container">
-             <div class="order-info">
+            <div class="row">
+             <div class="col colMobileOrder" style="max-width: 30vw;">
                  <h3>Ваш заказ</h3>
-                 <ul>
                      {% for item in cart %}
-                         <li>
-                             {{ item.quantity }}x {{ item.product.name }}
-                             <span>₽{{ item.total_price }}</span>
-                         </li>
+                         <div class="row">
+                             <div class="col" style="max-width: 30vw">
+                                <img src="{{MEDIA_URL}}{{item.product.image.url}}" class="d-block w-50" alt="...">
+                             </div>
+                             <div class="col">
+                                 {% if item.product.units == '100_g' %}
+                                    {{ item.product.name }} {{ item.quantity|multiplication_100 }} гр.
+                                 {% else %}
+                                    {{ item.product.name }} {{ item.quantity }} шт.
+                                 {% endif %}
+                                 <span>₽{{ item.total_price }}</span>
+                             </div>
+                         </div>
                      {% endfor %}
-                 </ul>
-                 <p>Общая сумма: ₽{{ cart.get_total_price }}</p>
+                 <p style="background-color: #faebd7; font-weight: bold; margin-top: 1rem">Общая сумма: ₽{{ cart.get_total_price }}</p>
              </div>
-             <form method="post" class="order-form">
-                 <div class="row" style="justify-content: center;">
-                     <div class="col colMobileOrder" style="max-width: 30vw;">
-                         {{ form.first_name }}
-                         {{ form.last_name }}
-                         {{ form.phone }}
-                         {{ form.email }}
-                         {{ form.address }}
-                         {{ form.city }}
-                         <input class="btn btn-primary btn-sm" type="submit" style="--bs-btn-bg: #ffa500;
-                                                                                    --bs-btn-border-color:#ffa500;
-                                                                                    --bs-btn-hover-bg: #ff9900;
-                                                                                    --bs-btn-hover-border-color: #ff9900;
-                                                                                    --bs-btn-active-bg: #ff9900;
-                                                                                    --bs-btn-active-border-color: #ff9900;
-                                                                                    color: #000000;
-                                                                                    margin-top: 1rem;
-                                                                                   "
-                                value="Оформить заказ">
-                         {% csrf_token %}
+             <div class="col colMobileOrder">
+                 <form method="post" class="order-form">
+                     <div class="row" style="justify-content: center;">
+                         <div class="col colMobileOrder" style="max-width: 30vw;">
+                             <h3>Данные для заказа</h3>
+                             {{ form.first_name }}
+                             {{ form.last_name }}
+                             {{ form.phone }}
+                             {{ form.email }}
+                             {{ form.address }}
+                             {{ form.city }}
+                             <input class="btn btn-primary btn-sm" type="submit" style="--bs-btn-bg: #ffa500;
+                                                                                        --bs-btn-border-color:#ffa500;
+                                                                                        --bs-btn-hover-bg: #ff9900;
+                                                                                        --bs-btn-hover-border-color: #ff9900;
+                                                                                        --bs-btn-active-bg: #ff9900;
+                                                                                        --bs-btn-active-border-color: #ff9900;
+                                                                                        color: #000000;
+                                                                                        margin-top: 1rem;
+                                                                                       "
+                                    value="Оформить заказ">
+                             {% csrf_token %}
+                         </div>
                      </div>
-                 </div>
-             </form>
+                 </form>
+             </div>
+            </div>
         </div>
         {% endblock content %}
     </body>

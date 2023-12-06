@@ -74,7 +74,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#">Контакты</a>
                 </li>
-                  {% if is_aut %}
+                  {% if admin_user %}
                     <li class="nav-item">
                       <a class="nav-link" href="{% url 'orders:order_list' %}">Список заказов</a>
                     </li>
@@ -123,8 +123,8 @@
         {% block content %}
         {% endblock content %}
 
-        <footer class="py-2 bg-body-tertiary">
-            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+        <footer class="py-2 bg-body-tertiary" style="position: fixed; width: 100vw; bottom: 0">
+            <div class="container px-4 px-lg-5"><p class="m-0 text-center" style="font-size: small; color: #808080;">Разработка приложения ZigulatNatria@yandex.ru</p></div>
         </footer>
     </body>
 </html>

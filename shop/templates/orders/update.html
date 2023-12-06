@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html" %}
+{% load custom_filters %}
+    <body>
+        {% block content %}
+        <div class="container">
+             <form method="post" class="order-form">
+                 <div class="row" style="justify-content: center;">
+                     <div class="col colMobileOrder" style="max-width: 30vw;">
+                         <h3>Отметка</h3>
+                         {{ form.as_p }}
+                         <input class="btn btn-primary btn-sm" type="submit" style="--bs-btn-bg: #ffa500;
+                                                                                    --bs-btn-border-color:#ffa500;
+                                                                                    --bs-btn-hover-bg: #ff9900;
+                                                                                    --bs-btn-hover-border-color: #ff9900;
+                                                                                    --bs-btn-active-bg: #ff9900;
+                                                                                    --bs-btn-active-border-color: #ff9900;
+                                                                                    color: #000000;
+                                                                                    margin-top: 1rem;
+                                                                                   "
+                                value="установить отметку">
+                         {% csrf_token %}
+                     </div>
+                 </div>
+             </form>
+        </div>
+        {% endblock content %}
+    </body>
+</html>

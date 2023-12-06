@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends "base.html" %}
+{% load custom_filters %}
     <body>
         {% block content %}
         {% load static %}
@@ -24,7 +25,11 @@
                         <th>{{ order.order }}</th>
                         <th>{{ order.product.name }}</th>
                         <th>{{ order.price }}</th>
-                        <th>{{ order.quantity }}</th>
+                        {% if order.product.units == '100_g' %}
+                            <th>{{ order.quantity|multiplication_100 }}гр</th>
+                        {% else %}
+                            <th>{{ order.quantity }}шт</th>
+                        {% endif %}
                         <th>{{ order.order.first_name }}</th>
                         <th>{{ order.order.last_name }}</th>
                         <th>
@@ -72,6 +77,7 @@
                     <p>{{ order.order }}</p>
                     <p>{{ order.order.first_name }}</p>
                     <p>{{ order.order.last_name }}</p>
+                    <p>{{ order.order.phone }}</p>
                     <p>{{ order.order.email }}</p>
                     <p>{{ order.order.address }}</p>
                     <p>{{ order.order.postal_code }}</p>

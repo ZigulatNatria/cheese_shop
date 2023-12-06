@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends 'base.html' %}
+{% load custom_filters %}
     <body>
         {% block content %}
             <h1 class="text-center">Каталог сыров</h1>
             <div class="container">
-                <div class="row">
+                <div class="row" style="margin-bottom: 4rem">
                     {% for product in products %}
                         {% if product.amount > 0 %}
                             <div class="col colMobile" style="min-width: 18rem; max-width: 18rem;">
@@ -20,8 +21,12 @@
                                         <div class="row">
                                             Цена: {{ product.price }}₽ / {{product.get_units_display}}
                                         </div>
-                                        <div class="row">
-                                            Осталось: {{ product.amount }}
+                                        <div class="row" style="font-size: small;">
+                                            {% if product.units == '100_g' %}
+                                            Осталось: {{ product.amount|multiplication_100 }}гр
+                                            {% else %}
+                                                Осталось: {{ product.amount }}шт
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <div class="card-footer">
@@ -63,17 +68,6 @@
                             </div>
                         {% endif %}
                     {% endfor %}
-                    {% if is_aut %}
-                            <div class="card" style="width: 18rem; margin: 1rem;">
-                                <img src="/static/img/add_chise.png"/>
-                                <div class="card-body">
-                                    <h2 class="card-title">Добавить сыр</h2>
-                                </div>
-                                <div class="card-footer">
-                                    <a class="btn btn-primary btn-sm" href="{% url 'add' %}">Добавить</a>
-                                </div>
-                            </div>
-                    {% endif %}
                 </div>
             </div>
         {% endblock content %}

@@ -70,7 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cart.context_processors.cart',      #Контекстный процессор для корзины
+                'cart.context_processors.cart',                 #Контекстный процессор для корзины
+                'showcase.context_processors.admin_user',       #Контекстный процессор для проверки администратора
             ],
         },
     },
