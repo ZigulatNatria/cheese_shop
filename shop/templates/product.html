@@ -77,6 +77,7 @@
                                     Осталось: {{ product.amount }} шт.
                                  {% endif %}
                              </div>
+                             {% if product.amount > 0 %}
                              <form action="{% url 'cart:cart_add' product.id %}" method="post" style="padding-right: calc(var(--bs-gutter-x) * .5); padding-left: calc(var(--bs-gutter-x) * .5);">
                                  <p>
                                  {% if product.units == '100_g' %}
@@ -96,6 +97,11 @@
                                                                                            "
                                         value="Добавить в корзину">
                              </form>
+                             {% else %}
+                             <div style="padding-right: calc(var(--bs-gutter-x) * .5); padding-left: calc(var(--bs-gutter-x) * .5); background-color: #E55137">
+                                 Нет в наличии
+                             </div>
+                             {% endif %}
                      </div>
                 </div>
             </div>

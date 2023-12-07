@@ -44,7 +44,7 @@
                         {% else %}
                             <div class="col colMobile" style="min-width: 18rem; max-width: 18rem; opacity: 0.6">
                                 <div class="card h-100" style="width: 100%; margin: 1rem; border: none">
-                                    <a href="#!" style="text-decoration: None; color: black">
+                                    <a href="{% url 'product_detail' product.id %}" style="text-decoration: None; color: black">
                                         <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ product.name }}</h5>
