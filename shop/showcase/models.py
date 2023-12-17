@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(verbose_name='название', max_length=50)
-    text = models.TextField(verbose_name='описание', null=True, blank=True)
-    image = models.ImageField(verbose_name='изображение', null=True, width_field=None, height_field=None, upload_to='images/') #TODO убрать null=True полсле сброса базы
 
     class Meta:
         verbose_name = 'категория'
