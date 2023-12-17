@@ -13,8 +13,10 @@
                                 <div class="card h-100" style="width: 100%; margin: 1rem; border: none">
                                     <a href="{% url 'product_detail' product.id %}" style="text-decoration: None; color: black">
                                     <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ product.name }}</h5>
+                                    <div class="card-body" style="height: 3rem; padding-left: 0">
+                                        <h5 class="card-title" style="font-size: large">{{ product.name }}</h5>
+                                    </div>
+                                    <div class="card-body" style="padding-left: 0">
                                         <p>Сорт сыра: {{ product.productCategory }}</p>
                                     </div>
                                     <div class="card-footer">
@@ -41,20 +43,25 @@
                                     </a>
                                 </div>
                             </div>
-                        {% else %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for product in products %}
+                        {% if product.amount <= 0 %}
                             <div class="col colMobile" style="min-width: 18rem; max-width: 18rem; opacity: 0.6">
                                 <div class="card h-100" style="width: 100%; margin: 1rem; border: none">
                                     <a href="{% url 'product_detail' product.id %}" style="text-decoration: None; color: black">
                                         <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ product.name }}</h5>
+                                        <div class="card-body" style="height: 3rem; padding-left: 0">
+                                            <h5 class="card-title" style="font-size: large">{{ product.name }}</h5>
+                                        </div>
+                                        <div class="card-body" style="padding-left: 0">
                                             <p>Сорт сыра: {{ product.productCategory }}</p>
                                         </div>
                                         <div class="card-footer">
                                             <div class="row">
                                                 Цена: {{ product.price }}₽ / {{product.get_units_display}}
                                             </div>
-                                            <div class="row" style="background-color: #E55137">
+                                            <div class="row" style="background-color: #E55137; font-size: small;">
                                                 Нет в наличии
                                             </div>
                                         </div>
