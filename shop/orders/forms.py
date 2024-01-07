@@ -53,18 +53,16 @@ class OrderCreateForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "style": "border-left: 0; border-top: 0; border-right: 0; padding-left: 0; border-radius: 0",
-                    "placeholder": 'Адрес',
+                    "placeholder": 'Дом, улица',
                 }
             ),
 
-            'city': forms.TextInput(
+            'city': forms.Select(
                 attrs={
-                    "class": "form-control",
+                    "class": "form-select",
                     "style": "border-left: 0; border-top: 0; border-right: 0; padding-left: 0; border-radius: 0",
-                    "placeholder": 'Город',
-                }
-            ),
-
+                },
+            )
         }
 
 

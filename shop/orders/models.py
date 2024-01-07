@@ -2,6 +2,17 @@ from django.db import models
 from showcase.models import Product
 
 
+class City(models.Model):
+    name = models.CharField(verbose_name='город', max_length=50)
+
+    class Meta:
+        verbose_name = 'город'
+        verbose_name_plural = 'города'
+
+    def __str__(self):
+        return self.name
+
+
 class Order(models.Model):
     first_name = models.CharField(verbose_name='имя', max_length=50)
     last_name = models.CharField(verbose_name='фамилия', max_length=50)
@@ -9,7 +20,7 @@ class Order(models.Model):
     phone = models.BigIntegerField(verbose_name='телефон')
     address = models.CharField(verbose_name='адрес', max_length=250)
     postal_code = models.IntegerField(verbose_name='почтовый индекс', null=True)
-    city = models.CharField(verbose_name='город', max_length=100)
+    city = models.ForeignKey('City', verbose_name='город', on_delete=models.CASCADE, default=1)
     created = models.DateTimeField(verbose_name='создано', auto_now_add=True)
     updated = models.DateTimeField(verbose_name='обновлено', auto_now=True)
     paid = models.BooleanField(verbose_name='оплата', default=False)

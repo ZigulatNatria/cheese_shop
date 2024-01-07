@@ -9,9 +9,9 @@
              <div class="col colMobileOrder" style="max-width: 30vw;">
                  <h3>Ваш заказ</h3>
                      {% for item in cart %}
-                         <div class="row">
+                         <div class="row" style="margin-bottom: 0.75rem">
                              <div class="col" style="max-width: 30vw">
-                                <img src="{{MEDIA_URL}}{{item.product.image.url}}" class="d-block w-50" alt="...">
+                                <img src="{{MEDIA_URL}}{{item.product.image.url}}" class="d-block w-100" alt="...">
                              </div>
                              <div class="col">
                                  {% if item.product.units == '100_g' %}
