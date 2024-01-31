@@ -24,9 +24,9 @@ class Product(models.Model):
     price = models.FloatField(verbose_name='цена', null=True, blank=True)
     amount = models.PositiveIntegerField(verbose_name='количество', null=True, blank=True)
     image = models.ImageField(verbose_name='фото', width_field=None, height_field=None, upload_to='images/')
-    # productCategory = models.ManyToManyField(Category, through='ProductCategory')
     productCategory = models.ForeignKey('Category', verbose_name='категория продукта', null=True, on_delete=models.CASCADE)
     units = models.CharField(verbose_name='единицы измерения', max_length=10, choices=UNITS, default='100_g')
+    published = models.BooleanField(verbose_name='публикация', default=False)
 
     class Meta:
         verbose_name = 'продукт'

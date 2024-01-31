@@ -8,50 +8,13 @@
             <div class="container">
                 <div class="row" style="margin-bottom: 4rem">
                     {% for product in products %}
-                        {% if product.amount > 0 %}
-                            <div class="col colMobile" style="min-width: 18rem; max-width: 18rem;">
-                                <div class="card h-100" style="width: 100%; margin: 1rem; border: none">
-                                    <a href="{% url 'product_detail' product.id %}" style="text-decoration: None; color: black">
-                                    <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
-                                    <div class="card-body" style="height: 4rem; padding-left: 0">
-                                        <h5 class="card-title" style="font-size: large">{{ product.name }}</h5>
-                                    </div>
-                                    <div class="card-body" style="padding-left: 0">
-                                        <p>Сорт сыра: {{ product.productCategory }}</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="row">
-                                            Цена: {{ product.price }}₽ / {{product.get_units_display}}
-                                        </div>
-                                        <div class="row" style="font-size: small;">
-                                            {% if product.units == '100_g' %}
-                                            Осталось: {{ product.amount|multiplication_100 }}гр
-                                            {% else %}
-                                                Осталось: {{ product.amount }}шт
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <form action="{% url 'cart:cart_add' product.id %}" method="post">
-                                            <div hidden>{{ view.product_add_cart }}</div>
-                                            {% csrf_token %}
-                                            <button type="submit" class="btn" style="background-color: #fff0; border: #fff0; padding-right:0; text-align: right;">
-                                                <img src="/static/img/cart_true.png" style="width: 30%">
-                                            </button>
-                                        </form>
-                                    </div>
-                                    </a>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                    {% for product in products %}
-                        {% if product.amount <= 0 %}
-                            <div class="col colMobile" style="min-width: 18rem; max-width: 18rem; opacity: 0.6">
-                                <div class="card h-100" style="width: 100%; margin: 1rem; border: none">
-                                    <a href="{% url 'product_detail' product.id %}" style="text-decoration: None; color: black">
+                        {% if product.published %}
+                            {% if product.amount > 0 %}
+                                <div class="col colMobile" style="min-width: 18rem; max-width: 18rem;">
+                                    <div class="card h-100" style="width: 100%; margin: 1rem; border: none">
+                                        <a href="{% url 'product_detail' product.id %}" style="text-decoration: None; color: black">
                                         <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
-                                        <div class="card-body" style="height: 3rem; padding-left: 0">
+                                        <div class="card-body" style="height: 4rem; padding-left: 0">
                                             <h5 class="card-title" style="font-size: large">{{ product.name }}</h5>
                                         </div>
                                         <div class="card-body" style="padding-left: 0">
@@ -61,18 +24,59 @@
                                             <div class="row">
                                                 Цена: {{ product.price }}₽ / {{product.get_units_display}}
                                             </div>
-                                            <div class="row" style="background-color: #E55137; font-size: small;">
-                                                Нет в наличии
+                                            <div class="row" style="font-size: small;">
+                                                {% if product.units == '100_g' %}
+                                                Осталось: {{ product.amount|multiplication_100 }}гр
+                                                {% else %}
+                                                    Осталось: {{ product.amount }}шт
+                                                {% endif %}
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button type="submit" class="btn" style="background-color: #fff0; border: #fff0; padding-right:0; text-align: right;">
-                                                <img src="/static/img/cart_true_reverse.png" style="width: 30%">
-                                            </button>
+                                            <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                                <div hidden>{{ view.product_add_cart }}</div>
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn" style="background-color: #fff0; border: #fff0; padding-right:0; text-align: right;">
+                                                    <img src="/static/img/cart_true.png" style="width: 30%">
+                                                </button>
+                                            </form>
                                         </div>
-                                    </a>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for product in products %}
+                        {% if product.published %}
+                            {% if product.amount <= 0 %}
+                                <div class="col colMobile" style="min-width: 18rem; max-width: 18rem; opacity: 0.6">
+                                    <div class="card h-100" style="width: 100%; margin: 1rem; border: none">
+                                        <a href="{% url 'product_detail' product.id %}" style="text-decoration: None; color: black">
+                                            <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
+                                            <div class="card-body" style="height: 3rem; padding-left: 0">
+                                                <h5 class="card-title" style="font-size: large">{{ product.name }}</h5>
+                                            </div>
+                                            <div class="card-body" style="padding-left: 0">
+                                                <p>Сорт сыра: {{ product.productCategory }}</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="row">
+                                                    Цена: {{ product.price }}₽ / {{product.get_units_display}}
+                                                </div>
+                                                <div class="row" style="background-color: #E55137; font-size: small;">
+                                                    Нет в наличии
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn" style="background-color: #fff0; border: #fff0; padding-right:0; text-align: right;">
+                                                    <img src="/static/img/cart_true_reverse.png" style="width: 30%">
+                                                </button>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>

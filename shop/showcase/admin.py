@@ -5,9 +5,9 @@ from .models import Product, Category, Comment
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'text', 'price', 'amount', 'get_image', 'productCategory', 'units')
-    list_display_links = ('name', 'text', 'price', 'amount', 'get_image', 'productCategory', 'units')
-    search_fields = ('name', 'text')
+    list_display = ('get_image', 'name', 'text', 'price', 'amount', 'productCategory', 'units', 'published')
+    list_display_links = ('get_image', 'name', 'text', 'price', 'amount', 'productCategory', 'units', 'published')
+    search_fields = ('name', 'text', 'published')
 
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.image.url} width="130" height="100"')
