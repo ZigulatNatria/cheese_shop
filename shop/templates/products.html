@@ -4,14 +4,14 @@
 {% load custom_filters %}
     <body>
         {% block content %}
-            <h1 class="text-center">Каталог сыров</h1>
+            <h1 class="text-center" style="margin-bottom: 1rem">Каталог сыров</h1>
             <div class="container">
-                <div class="row" style="margin-bottom: 4rem">
+                <div class="row justify-content-evenly" style="margin-bottom: 4rem">
                     {% for product in products %}
                         {% if product.published %}
                             {% if product.amount > 0 %}
                                 <div class="col colMobile" style="min-width: 18rem; max-width: 18rem;">
-                                    <div class="card h-100" style="width: 100%; margin: 1rem; border: none">
+                                    <div class="card h-100" style="width: 100%; margin-bottom: 1rem; margin-left:0; border: none">
                                         <a href="{% url 'product_detail' product.id %}" style="text-decoration: None; color: black">
                                         <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
                                         <div class="card-body" style="height: 4rem; padding-left: 0">
@@ -51,10 +51,10 @@
                         {% if product.published %}
                             {% if product.amount <= 0 %}
                                 <div class="col colMobile" style="min-width: 18rem; max-width: 18rem; opacity: 0.6">
-                                    <div class="card h-100" style="width: 100%; margin: 1rem; border: none">
+                                    <div class="card h-100" style="width: 100%; margin-bottom: 1rem; margin-left:0; border: none">
                                         <a href="{% url 'product_detail' product.id %}" style="text-decoration: None; color: black">
                                             <img src="{{MEDIA_URL}}{{product.image.url}}" class="card-img-top" alt="...">
-                                            <div class="card-body" style="height: 3rem; padding-left: 0">
+                                            <div class="card-body" style="height: 4rem; padding-left: 0">
                                                 <h5 class="card-title" style="font-size: large">{{ product.name }}</h5>
                                             </div>
                                             <div class="card-body" style="padding-left: 0">
